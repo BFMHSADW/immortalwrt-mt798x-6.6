@@ -26,13 +26,15 @@ jobs:
       - name: Use defconfig
         run: |
           cp defconfig/mt7986-ax6000.config .config
-          bash scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-mt6000
-          bash scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_jdcloud_re-cp-03
-          bash scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6086
-          bash scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6088
-          bash scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-ubootmod
-          bash scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-stock
-          bash scripts/config --enable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_netcore_n60-pro
+          # 注释掉其他设备
+          sed -i 's/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-mt6000=y/# CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-mt6000 is not set/' .config
+          sed -i 's/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_jdcloud_re-cp-03=y/# CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_jdcloud_re-cp-03 is not set/' .config
+          sed -i 's/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6086=y/# CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6086 is not set/' .config
+          sed -i 's/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6088=y/# CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6088 is not set/' .config
+          sed -i 's/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-ubootmod=y/# CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-ubootmod is not set/' .config
+          sed -i 's/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-stock=y/# CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-stock is not set/' .config
+          # 启用 N60 Pro
+          echo 'CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_netcore_n60-pro=y' >> .config
           make defconfig
 
       - name: Download
