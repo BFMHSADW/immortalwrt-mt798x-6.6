@@ -36,6 +36,7 @@ jobs:
           # 启用 N60 Pro
           echo 'CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_netcore_n60-pro=y' >> .config
           echo 'CONFIG_PACKAGE_kmod-mtd-rw=y' >> .config
+          echo 'CONFIG_PACKAGE_luci-theme-liquid=y' >> .config
           make defconfig
 
       - name: Download
