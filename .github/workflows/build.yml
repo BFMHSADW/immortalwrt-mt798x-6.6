@@ -25,7 +25,14 @@ jobs:
 
       - name: Use defconfig
         run: |
-          cp defconfig/mt7986-n60-pro-512m.config .config
+          cp defconfig/mt7986-ax6000.config .config
+          ./scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-mt6000
+          ./scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_jdcloud_re-cp-03
+          ./scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6086
+          ./scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6088
+          ./scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-ubootmod
+          ./scripts/config --disable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-stock
+          ./scripts/config --enable CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_netcore_n60-pro
           make defconfig
 
       - name: Download
@@ -38,4 +45,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: n60pro-firmware
-          path: bin/targets/mediatek/mt7986/*n60-pro*sysupgrade*
+          path: bin/targets/mediatek/*n60-pro*sysupgrade*
